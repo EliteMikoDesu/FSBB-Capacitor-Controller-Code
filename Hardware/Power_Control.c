@@ -72,7 +72,7 @@ void  PID_Control()
 			PID_calc(&control.currout_loop, measure.I_DCDC, control.I_Charge_limited );	//DCDC电流环
 			PID_calc(&control.voltout_loop, ADC_V_CAP.Solved_value, V_Set);//电容电压环
 			
-			if(measure.P_DCDC>0.5)//需要充电
+			if(measure.P_DCDC>0)//需要充电
 			{
 				if(control.currout_loop.out<control.voltout_loop.out)//选择电压环还是电流环
 				{
@@ -118,7 +118,7 @@ void  PID_Control()
 			PID_calc(&control.currout_loop, measure.I_DCDC, control.I_Charge_limited );			//DCDC电流环
 			PID_calc(&control.voltout_loop, ADC_V_CAP.Solved_value, V_Set);//电容电压环
 
-			if(measure.P_DCDC>0.5)//需要充电
+			if(measure.P_DCDC>0)//需要充电
 			{
 				if(control.currout_loop.out<control.voltout_loop.out)//选择电压环还是电流环
 				{
