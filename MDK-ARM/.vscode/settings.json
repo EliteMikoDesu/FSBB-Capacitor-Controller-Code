@@ -1,5 +1,8 @@
 {
     "files.associations": {
-        "POWER_CONTROL.H": "cpp"
+        "POWER_CONTROL.H": "cpp",
+        "measure.h": "c",
+        "timer.h": "c",
+        "hrtim.h": "c"
     }
 }

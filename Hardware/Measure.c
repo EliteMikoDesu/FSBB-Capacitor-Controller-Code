@@ -123,7 +123,6 @@ void ADC_Measure(void)
 		//计算DC-DC输入/输出功率
 		measure.V_DCDC = ADC_VIN.Solved_value;
 		measure.I_DCDC = ADC_I_IN.Solved_value - ADC_I_MOTOR.Solved_value ;
-		
 		measure.P_DCDC = measure.V_DCDC * measure.I_DCDC ;
 			
 		//计算电容输入/输出功率
@@ -158,7 +157,7 @@ void ADC_Measure(void)
 
 		//计算目标DC-DC输入电流
 		control.I_Set = control.P_set / ADC_VIN.Solved_value ;
-		control.I_Charge_limited = control.I_Set;
+		control.I_Charge_limited = control.I_Set - ADC_I_MOTOR.Solved_value ;
 		
 		//限制目标DC-DC输入电流
 		control.I_CAP_IN_MAX=10.0f;

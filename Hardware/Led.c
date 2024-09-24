@@ -13,14 +13,16 @@ void Led_Control(void)
 void Led_Config_Control(void)
 {
 	//if(control.currout_loop.out<control.voltout_loop.out)//C loop LED3 enable
-	if(control.Cap_Mode==BUCK)//BUCK mode LED3 enable
+	if(measure.P_DCDC>0)//BUCK mode LED3 enable
+	//if(control.Cap_Mode==BUCK)//BUCK mode LED3 enable
 	{
 		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_12, GPIO_PIN_RESET);
 		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_13, GPIO_PIN_SET);
 	}
 	
 	//else if(control.currout_loop.out>control.voltout_loop.out)//V loop LED2 enable
-	else if(control.Cap_Mode==BUCK_BOOST)//BUCK-BOOST mode LED2 enable
+	else if(measure.P_DCDC<=0)//BUCK-BOOST mode LED2 enable
+	//else if(control.Cap_Mode==BUCK_BOOST)//BUCK-BOOST mode LED2 enable
 	{
 		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_13, GPIO_PIN_RESET);
 		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_12, GPIO_PIN_SET);
