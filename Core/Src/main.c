@@ -127,8 +127,8 @@ int main(void)
 
 
 //以BUCK模式作为默认模式
-	PID_init(&control.currout_loop, 2.0f, 1.0f, 0.01f, BUCK_LEFT_MAX_DUTY-BUCK_LEFT_MIN_DUTY, 200, BUCK_LEFT_MIN_DUTY-BUCK_LEFT_MAX_DUTY, -200);     //DC-DC电流环
-  PID_init(&control.voltout_loop, 2.0f, 1.0f, 0.01f,BUCK_LEFT_MAX_DUTY-BUCK_LEFT_MIN_DUTY, 200, BUCK_LEFT_MIN_DUTY-BUCK_LEFT_MAX_DUTY, -200);      //电容电压环
+	PID_init(&control.currout_loop, 20.0f, 3.0f, 0.01f, BUCK_LEFT_MAX_DUTY-BUCK_LEFT_MIN_DUTY, 200, BUCK_LEFT_MIN_DUTY-BUCK_LEFT_MAX_DUTY, -200);     //DC-DC电流环
+  PID_init(&control.voltout_loop, 20.0f, 3.0f, 0.01f,BUCK_LEFT_MAX_DUTY-BUCK_LEFT_MIN_DUTY, 200, BUCK_LEFT_MIN_DUTY-BUCK_LEFT_MAX_DUTY, -200);      //电容电压环
 
 
 //BUCK-BOOST参数

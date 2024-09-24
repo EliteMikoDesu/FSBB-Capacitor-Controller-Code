@@ -65,8 +65,8 @@ void  PID_Control()
 		{
 			if (control.BBModeChange!=0)
 			{
-			PID_init(&control.currout_loop, 2.0f, 1.0f, 0.01f, BUCK_LEFT_MAX_DUTY-BUCK_LEFT_MIN_DUTY, 200, BUCK_LEFT_MIN_DUTY-BUCK_LEFT_MAX_DUTY, -200);     //DC-DC电流环
-  			PID_init(&control.voltout_loop, 2.0f, 1.0f, 0.01f,BUCK_LEFT_MAX_DUTY-BUCK_LEFT_MIN_DUTY, 200, BUCK_LEFT_MIN_DUTY-BUCK_LEFT_MAX_DUTY, -200);     //电容电压环
+			PID_init(&control.currout_loop, 20.0f, 3.0f, 0.01f, BUCK_LEFT_MAX_DUTY-BUCK_LEFT_MIN_DUTY, 200, BUCK_LEFT_MIN_DUTY-BUCK_LEFT_MAX_DUTY, -200);     //DC-DC电流环
+  			PID_init(&control.voltout_loop, 20.0f, 3.0f, 0.01f,BUCK_LEFT_MAX_DUTY-BUCK_LEFT_MIN_DUTY, 200, BUCK_LEFT_MIN_DUTY-BUCK_LEFT_MAX_DUTY, -200);     //电容电压环
 			control.BBModeChange = 0;
 			}
 			PID_calc(&control.currout_loop, measure.I_DCDC, control.I_Charge_limited );	//DCDC电流环
@@ -98,9 +98,9 @@ void  PID_Control()
 				control.left_duty=BUCK_LEFT_MIN_DUTY;
 			}
 
-			if(measure.I_DCDC<0.5f && (ADC_V_CAP.Solved_filter_out/ADC_VIN.Solved_filter_out)<0.125)
+			if((ADC_V_CAP.Solved_value/ADC_VIN.Solved_value)<0.125f)
 			{
-				control.left_duty=720;
+				//control.left_duty=1000;
 			}
 			
 			control.right_duty=BUCK_RIGHT_DUTY;//给右桥固定值
@@ -111,8 +111,8 @@ void  PID_Control()
 		{
 			if (control.BBModeChange!=0)
 			{
-				PID_init(&control.currout_loop, 2.2f, 2.5f, 0.01f, BUCK_BOOST_RIGHT_MAX_DUTY- BUCK_BOOST_RIGHT_MIN_DUTY, 200, BUCK_BOOST_RIGHT_MIN_DUTY-BUCK_BOOST_RIGHT_MAX_DUTY, -200);     //DC-DC电流环
-				PID_init(&control.voltout_loop, 2.2f, 2.5f, 0.01f,BUCK_BOOST_RIGHT_MAX_DUTY- BUCK_BOOST_RIGHT_MIN_DUTY, 200, BUCK_BOOST_RIGHT_MIN_DUTY-BUCK_BOOST_RIGHT_MAX_DUTY, -200);      //电容电压环
+				PID_init(&control.currout_loop, 20.2f, 2.5f, 0.01f, BUCK_BOOST_RIGHT_MAX_DUTY- BUCK_BOOST_RIGHT_MIN_DUTY, 200, BUCK_BOOST_RIGHT_MIN_DUTY-BUCK_BOOST_RIGHT_MAX_DUTY, -200);     //DC-DC电流环
+				PID_init(&control.voltout_loop, 20.2f, 2.5f, 0.01f,BUCK_BOOST_RIGHT_MAX_DUTY- BUCK_BOOST_RIGHT_MIN_DUTY, 200, BUCK_BOOST_RIGHT_MIN_DUTY-BUCK_BOOST_RIGHT_MAX_DUTY, -200);      //电容电压环
 				control.BBModeChange = 0;
 			}
 			PID_calc(&control.currout_loop, measure.I_DCDC, control.I_Charge_limited );			//DCDC电流环
@@ -153,8 +153,8 @@ void  PID_Control()
 		{
 			if (control.BBModeChange!=0)
 			{
-				PID_init(&control.currout_loop, 2.0f, 2.5f, 0.01f, BOOST_RIGHT_MAX_DUTY-BOOST_RIGHT_MIN_DUTY, 200, BUCK_LEFT_MIN_DUTY-BUCK_LEFT_MAX_DUTY, -200);     //DC-DC电流环
-				PID_init(&control.voltout_loop, 2.0f, 2.5f, 0.01f,BUCK_LEFT_MAX_DUTY-BUCK_LEFT_MIN_DUTY, 200, BUCK_LEFT_MIN_DUTY-BUCK_LEFT_MAX_DUTY, -200);      //电容电压环
+				PID_init(&control.currout_loop, 200.0f, 2.5f, 0.01f, BOOST_RIGHT_MAX_DUTY-BOOST_RIGHT_MIN_DUTY, 200, BUCK_LEFT_MIN_DUTY-BUCK_LEFT_MAX_DUTY, -200);     //DC-DC电流环
+				PID_init(&control.voltout_loop, 200.0f, 2.5f, 0.01f,BUCK_LEFT_MAX_DUTY-BUCK_LEFT_MIN_DUTY, 200, BUCK_LEFT_MIN_DUTY-BUCK_LEFT_MAX_DUTY, -200);      //电容电压环
 				control.BBModeChange = 0;
 			}
 		}
@@ -327,7 +327,7 @@ void Mode_Judgment(void)
 			// BUCK模式
 		case BUCK:
 		{
-				if((control.left_duty>=BUCK_LEFT_MAX_DUTY)&&(control.vloop_ratio<0.9))
+				if((control.left_duty>=BUCK_LEFT_MAX_DUTY)||(control.vloop_ratio>0.9))
 				{
 					control.Cap_Mode = BUCK_BOOST;
 				}
@@ -336,7 +336,7 @@ void Mode_Judgment(void)
 			//BUCK_BOOST模式
 		case BUCK_BOOST:
 		{
-				if((control.I_Charge_limited>0)&&((0.9<=control.vloop_ratio)&&(control.vloop_ratio<1.2)))//充电模式
+				if((control.I_Charge_limited>0)||((0.9>=control.vloop_ratio)&&(control.vloop_ratio>1.2)))//充电模式
 				{
 					if (control.right_duty <= BUCK_BOOST_RIGHT_MIN_DUTY) //vout<0.8*vin
 					{
