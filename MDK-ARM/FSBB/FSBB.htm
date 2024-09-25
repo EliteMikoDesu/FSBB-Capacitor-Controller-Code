@@ -3,7 +3,7 @@
 <title>Static Call Graph - [FSBB\FSBB.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image FSBB\FSBB.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060960: Last Updated: Tue Sep 24 20:32:43 2024
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060960: Last Updated: Wed Sep 25 20:01:30 2024
 <BR><P>
 <H3>Maximum Stack Usage =        296 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -463,7 +463,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[69]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_init
 </UL>
 
-<P><STRONG><a name="[67]"></a>ADC_Measure</STRONG> (Thumb, 826 bytes, Stack size 36 bytes, measure.o(i.ADC_Measure))
+<P><STRONG><a name="[67]"></a>ADC_Measure</STRONG> (Thumb, 878 bytes, Stack size 36 bytes, measure.o(i.ADC_Measure))
 <BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = ADC_Measure &rArr; ringbuf_cal
 </UL>
 <BR>[Calls]<UL><LI><a href="#[68]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ringbuf_cal
@@ -805,8 +805,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[ba]"></a>HAL_GPIO_WritePin</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, stm32f3xx_hal_gpio.o(i.HAL_GPIO_WritePin))
-<BR><BR>[Called By]<UL><LI><a href="#[e3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;my_key
-<LI><a href="#[d7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Power_on_Self_Test
+<BR><BR>[Called By]<UL><LI><a href="#[d7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Power_on_Self_Test
 <LI><a href="#[c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_GPIO_Init
 <LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Led_Config_Control
 <LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Input_undervoltage_protection
@@ -885,8 +884,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[d9]"></a>HAL_HRTIM_WaveformOutputStart</STRONG> (Thumb, 52 bytes, Stack size 0 bytes, stm32f3xx_hal_hrtim.o(i.HAL_HRTIM_WaveformOutputStart))
-<BR><BR>[Called By]<UL><LI><a href="#[e3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;my_key
-<LI><a href="#[d7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Power_on_Self_Test
+<BR><BR>[Called By]<UL><LI><a href="#[d7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Power_on_Self_Test
 </UL>
 
 <P><STRONG><a name="[d4]"></a>HAL_HRTIM_WaveformOutputStop</STRONG> (Thumb, 52 bytes, Stack size 0 bytes, stm32f3xx_hal_hrtim.o(i.HAL_HRTIM_WaveformOutputStop))
@@ -1171,7 +1169,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[26]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM1_UP_TIM16_IRQHandler
 </UL>
 
-<P><STRONG><a name="[77]"></a>Led_Config_Control</STRONG> (Thumb, 122 bytes, Stack size 8 bytes, led.o(i.Led_Config_Control))
+<P><STRONG><a name="[77]"></a>Led_Config_Control</STRONG> (Thumb, 104 bytes, Stack size 8 bytes, led.o(i.Led_Config_Control))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = Led_Config_Control
 </UL>
 <BR>[Calls]<UL><LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_WritePin
@@ -1313,7 +1311,7 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f334x8.o(RESET)
 </UL>
-<P><STRONG><a name="[d2]"></a>PID_Control</STRONG> (Thumb, 804 bytes, Stack size 56 bytes, power_control.o(i.PID_Control))
+<P><STRONG><a name="[d2]"></a>PID_Control</STRONG> (Thumb, 900 bytes, Stack size 56 bytes, power_control.o(i.PID_Control))
 <BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = PID_Control
 </UL>
 <BR>[Calls]<UL><LI><a href="#[d4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_HRTIM_WaveformOutputStop
@@ -1333,15 +1331,14 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[d5]"></a>PID_init</STRONG> (Thumb, 74 bytes, Stack size 0 bytes, pid.o(i.PID_init))
-<BR><BR>[Called By]<UL><LI><a href="#[e3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;my_key
-<LI><a href="#[50]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+<BR><BR>[Called By]<UL><LI><a href="#[50]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 <LI><a href="#[d2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PID_Control
 </UL>
 
 <P><STRONG><a name="[b]"></a>PendSV_Handler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, stm32f3xx_it.o(i.PendSV_Handler))
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f334x8.o(RESET)
 </UL>
-<P><STRONG><a name="[d7]"></a>Power_on_Self_Test</STRONG> (Thumb, 632 bytes, Stack size 32 bytes, power_control.o(i.Power_on_Self_Test))
+<P><STRONG><a name="[d7]"></a>Power_on_Self_Test</STRONG> (Thumb, 582 bytes, Stack size 32 bytes, power_control.o(i.Power_on_Self_Test))
 <BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = Power_on_Self_Test &rArr; HAL_Delay
 </UL>
 <BR>[Calls]<UL><LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_Delay
@@ -1350,7 +1347,8 @@ Global Symbols
 <LI><a href="#[68]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ringbuf_cal
 <LI><a href="#[d8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADCvalue_to_ELEC
 </UL>
-<BR>[Called By]<UL><LI><a href="#[50]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+<BR>[Called By]<UL><LI><a href="#[e3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;my_key
+<LI><a href="#[50]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
 <P><STRONG><a name="[9]"></a>SVC_Handler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, stm32f3xx_it.o(i.SVC_Handler))
@@ -1478,14 +1476,12 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[4f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_entry_main
 </UL>
 
-<P><STRONG><a name="[e3]"></a>my_key</STRONG> (Thumb, 314 bytes, Stack size 48 bytes, key.o(i.my_key))
-<BR><BR>[Stack]<UL><LI>Max Depth = 64<LI>Call Chain = my_key &rArr; HAL_Delay
+<P><STRONG><a name="[e3]"></a>my_key</STRONG> (Thumb, 206 bytes, Stack size 32 bytes, key.o(i.my_key))
+<BR><BR>[Stack]<UL><LI>Max Depth = 80<LI>Call Chain = my_key &rArr; Power_on_Self_Test &rArr; HAL_Delay
 </UL>
 <BR>[Calls]<UL><LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_Delay
-<LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_WritePin
 <LI><a href="#[e4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_ReadPin
-<LI><a href="#[d9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_HRTIM_WaveformOutputStart
-<LI><a href="#[d5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PID_init
+<LI><a href="#[d7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Power_on_Self_Test
 </UL>
 <BR>[Called By]<UL><LI><a href="#[50]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>

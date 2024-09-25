@@ -34,7 +34,7 @@ void my_key()
 		
 		if(KEY1==0)      
 		{
-				control.P_set+=40;
+			control.P_set+=40;
 		}
 	} 
 	if(KEY1==1) 
@@ -64,10 +64,7 @@ void my_key()
 		if(KEY3 == 0)
 		{
 			control.STBYCnt=0;
-			PID_init(&control.currout_loop, 20.0f, 3.0f, 0.01f, BUCK_LEFT_MAX_DUTY-BUCK_LEFT_MIN_DUTY, 200, BUCK_LEFT_MIN_DUTY-BUCK_LEFT_MAX_DUTY, -200);     //DC-DC电流环
-  			PID_init(&control.voltout_loop, 20.0f, 3.0f, 0.01f,BUCK_LEFT_MAX_DUTY-BUCK_LEFT_MIN_DUTY, 200, BUCK_LEFT_MIN_DUTY-BUCK_LEFT_MAX_DUTY, -200);      //电容电压环
-			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_12, GPIO_PIN_SET);
-			HAL_HRTIM_WaveformOutputStart(&hhrtim1, HRTIM_OUTPUT_TA1|HRTIM_OUTPUT_TA2 | HRTIM_OUTPUT_TB1|HRTIM_OUTPUT_TB2);
+			Power_on_Self_Test();
 		}
 	}
 	if(KEY3==1) Key_Flag_3=1; 	//当无按键按下或着按键松开后，按键标志位 重新置1，为下次按键按下做准备	

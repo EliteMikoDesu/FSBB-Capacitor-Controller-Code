@@ -52,11 +52,13 @@ void  PID_Control()
 		{
 			if (control.BBModeChange!=0)
 			{
-			PID_init(&control.currout_loop, 0.2f, 0.03f, 0.11f, BUCK_LEFT_MAX_DUTY-BUCK_LEFT_MIN_DUTY, 200, BUCK_LEFT_MIN_DUTY-BUCK_LEFT_MAX_DUTY, -200);     //DC-DC电流环
-  			PID_init(&control.voltout_loop, 1.0f, 0.06f, 3.0f,BUCK_LEFT_MAX_DUTY-BUCK_LEFT_MIN_DUTY, 200, BUCK_LEFT_MIN_DUTY-BUCK_LEFT_MAX_DUTY, -200);     //电容电压环
+			PID_init(&control.powerin_loop, 10.2f, 3.0f, 0.11f,400,50,-400,50);
+			PID_init(&control.currout_loop, 10.2f, 3.0f, 0.11f, BUCK_LEFT_MAX_DUTY-BUCK_LEFT_MIN_DUTY, 200, BUCK_LEFT_MIN_DUTY-BUCK_LEFT_MAX_DUTY, -200);     //DC-DC电流环
+  			PID_init(&control.voltout_loop, 10.0f, 6.0f, 3.0f,BUCK_LEFT_MAX_DUTY-BUCK_LEFT_MIN_DUTY, 200, BUCK_LEFT_MIN_DUTY-BUCK_LEFT_MAX_DUTY, -200);     //电容电压环
 			control.BBModeChange = 0;
 			}
-			PID_calc(&control.currout_loop, measure.I_DCDC, control.I_Charge_limited );	//DCDC电流环
+			PID_calc(&control.powerin_loop, measure.P_DCDC, control.P_set);
+			PID_calc(&control.currout_loop, measure.I_DCDC, control.I_Charge_limited);	//DCDC电流环
 			PID_calc(&control.voltout_loop, ADC_V_CAP.Solved_value, V_Set);//电容电压环
 			
 			if(measure.P_DCDC>0)//需要充电
@@ -94,10 +96,12 @@ void  PID_Control()
 		{
 			if (control.BBModeChange!=0)
 			{
-				PID_init(&control.currout_loop, 0.2f, 0.03f, 0.11f, BUCK_BOOST_RIGHT_MAX_DUTY- BUCK_BOOST_RIGHT_MIN_DUTY, 200, BUCK_BOOST_RIGHT_MIN_DUTY-BUCK_BOOST_RIGHT_MAX_DUTY, -200);     //DC-DC电流环
-				PID_init(&control.voltout_loop, 1.0f, 0.06f, 3.0f,BUCK_BOOST_RIGHT_MAX_DUTY- BUCK_BOOST_RIGHT_MIN_DUTY, 200, BUCK_BOOST_RIGHT_MIN_DUTY-BUCK_BOOST_RIGHT_MAX_DUTY, -200);      //电容电压环
+				PID_init(&control.powerin_loop, 10.2f, 3.0f, 0.11f,400,50,-400,50);
+				PID_init(&control.currout_loop, 10.2f, 3.0f, 0.11f, BUCK_BOOST_RIGHT_MAX_DUTY- BUCK_BOOST_RIGHT_MIN_DUTY, 200, BUCK_BOOST_RIGHT_MIN_DUTY-BUCK_BOOST_RIGHT_MAX_DUTY, -200);     //DC-DC电流环
+				PID_init(&control.voltout_loop, 10.0f, 6.0f, 3.0f,BUCK_BOOST_RIGHT_MAX_DUTY- BUCK_BOOST_RIGHT_MIN_DUTY, 200, BUCK_BOOST_RIGHT_MIN_DUTY-BUCK_BOOST_RIGHT_MAX_DUTY, -200);      //电容电压环
 				control.BBModeChange = 0;
 			}
+			PID_calc(&control.powerin_loop, measure.P_DCDC, control.P_set);
 			PID_calc(&control.currout_loop, measure.I_DCDC, control.I_Charge_limited );			//DCDC电流环
 			PID_calc(&control.voltout_loop, ADC_V_CAP.Solved_value, V_Set);//电容电压环
 
@@ -188,8 +192,8 @@ void Power_on_Self_Test()
 		
 	if(ADC_I_IN.Solved_filter_out>0.5f||ADC_I_MOTOR.Solved_filter_out>0.5f||ADC_I_CAP.Solved_filter_out>0.5f)		//电流检测异常
 	{
-		control.Cap_Mode=Standby;
-		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_12, GPIO_PIN_RESET);			
+		//control.Cap_Mode=Standby;
+		//HAL_GPIO_WritePin(GPIOA, GPIO_PIN_12, GPIO_PIN_RESET);			
 	}
 		
 	control.vloop_ratio=ADC_V_CAP.Solved_filter_out/ADC_VIN.Solved_filter_out;

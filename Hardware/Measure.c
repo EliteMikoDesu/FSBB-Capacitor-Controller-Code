@@ -157,7 +157,20 @@ void ADC_Measure(void)
 
 		//计算目标DC-DC输入电流
 		control.I_Set = control.P_set / ADC_VIN.Solved_value ;
-		control.I_Charge_limited = control.I_Set - ADC_I_MOTOR.Solved_value ;
+		if((control.powerin_loop.out / measure.V_DCDC)> control.I_Set)
+		{
+			if(control.I_Set>control.I_CAP_OUT_MAX)
+			control.I_Charge_limited=control.I_Set;
+			else
+			control.I_Charge_limited=control.I_CAP_OUT_MAX;
+		}
+		else
+		{
+			if((control.powerin_loop.out / measure.V_DCDC)>control.I_CAP_OUT_MAX)
+			control.I_Charge_limited=(control.powerin_loop.out / measure.V_DCDC);
+			else
+			control.I_Charge_limited=control.I_CAP_OUT_MAX;
+		}
 		
 		//限制目标DC-DC输入电流
 		control.I_CAP_IN_MAX=10.0f;
